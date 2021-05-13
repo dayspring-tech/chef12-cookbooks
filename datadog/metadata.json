@@ -1,0 +1,48 @@
+{
+  "name": "datadog",
+  "description": "Installs/Configures datadog components",
+  "long_description": "",
+  "maintainer": "Datadog",
+  "maintainer_email": "package@datadoghq.com",
+  "license": "Apache-2.0",
+  "platforms": {
+    "amazon": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "windows": ">= 0.0.0",
+    "suse": ">= 0.0.0"
+  },
+  "dependencies": {
+    "chef_handler": ">= 1.2",
+    "apt": ">= 0.0.0",
+    "yum": ">= 3.0"
+  },
+  "providing": {
+
+  },
+  "attributes": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "4.10.0",
+  "source_url": "https://github.com/DataDog/chef-datadog",
+  "issues_url": "https://github.com/DataDog/chef-datadog/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 12.7"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ]
+}

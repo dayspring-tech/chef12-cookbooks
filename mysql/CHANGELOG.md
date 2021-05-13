@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 10.1.2 - *2021-03-26*
+
+- Fix ctrl\_user always set as root for mysql\_user resource
+
+## 10.1.1 - *2021-03-11*
+
+- Fix db initialization status correctly on MySQL 8.0
+
+## 10.1.0 - *2021-03-11*
+
+- Add dependency on apparmor cookbook to fix #660
+
+## 10.0.2 - *2021-02-25*
+
+- Update README.md to reflect dropping ubuntu 16.04 support and fixing the cookbook version in the usage section
+
 ## 10.0.1 - *2021-01-25*
 
 ## 10.0.0 - *2021-01-25*

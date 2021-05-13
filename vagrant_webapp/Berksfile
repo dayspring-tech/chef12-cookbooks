@@ -10,3 +10,6 @@ cookbook "mingw", "~> 2.1.1"
 cookbook "yum-epel", "~> 4"
 cookbook "composer"
 cookbook "php", "~> 6"
+
+cookbook 'datadog', '~> 4.10.0'
+cookbook "yum", "~> 5"
