@@ -1,0 +1,12 @@
+source "https://supermarket.chef.io"
+
+metadata
+
+cookbook "apache2", "~> 4"
+cookbook "apt", "~> 6"
+cookbook "seven_zip", "~> 2"
+cookbook "windows", "~> 4"
+cookbook "mingw", "~> 2.1.1"
+cookbook "yum-epel", "~> 4"
+cookbook "composer"
+cookbook "php", "~> 6"

@@ -1,0 +1,67 @@
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  <% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+  <% end -%>
+  DocumentRoot <%= @params[:docroot] %>
+
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks
+    AllowOverride All
+
+    <% if node[:apache][:version] == '2.2' -%>
+    Order allow,deny
+    Allow from all
+    <% else -%>
+    Require all granted
+    <% end -%>
+  </Directory>
+
+  <Directory ~ "\.svn">
+    <% if node[:apache][:version] == '2.2' -%>
+    Order allow,deny
+    Deny from all
+    <% else -%>
+    Require all denied
+    <% end -%>
+  </Directory>
+
+  <Directory ~ "\.git">
+    <% if node[:apache][:version] == '2.2' -%>
+    Order allow,deny
+    Deny from all
+    <% else -%>
+    Require all denied
+    <% end -%>
+  </Directory>
+
+  LogLevel <%= node[:apache][:log_level] %>
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-ganglia.log ganglia
+
+  FileETag none
+
+  RewriteEngine On
+  <% if node[:apache][:version] == '2.2' -%>
+  Include <%= @params[:rewrite_config] %>*
+  RewriteLog <%= node[:apache][:log_dir] %>/<%= @application_name %>-rewrite.log
+  RewriteLogLevel 0
+  <% else -%>
+  IncludeOptional <%= @params[:rewrite_config] %>*
+  <% end -%>
+
+  <% if @params[:mounted_at] -%>
+  AliasMatch ^<%= @params[:mounted_at] %>/(.*)$ <%= @params[:docroot] %>$1
+  <% end -%>
+
+  <% if node[:apache][:version] == '2.2' -%>
+  Include <%= @params[:local_config] %>*
+  <% else -%>
+  IncludeOptional <%= @params[:local_config] %>*
+  <% end -%>
+
+  # disable sendfile
+  # https://www.vagrantup.com/docs/synced-folders/virtualbox.html
+  EnableSendfile off
+</VirtualHost>

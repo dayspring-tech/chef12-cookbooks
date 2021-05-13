@@ -1,0 +1,17 @@
+name        "deploy"
+description "Deploy applications"
+maintainer  "AWS OpsWorks"
+license     "Apache 2.0"
+version     "1.0.0"
+
+# depends "dependencies"
+depends "scm_helper"
+depends "apache2"
+# depends "mod_php5_apache2"
+# depends "nginx"
+# depends "ssh_users"
+# depends "opsworks_agent_monit"
+# depends "unicorn"
+depends "php"
+
+recipe "deploy::php", "Deploy a PHP application"

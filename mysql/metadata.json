@@ -1,0 +1,45 @@
+{
+  "name": "mysql",
+  "description": "Provides mysql_service, mysql_config, and mysql_client resources",
+  "long_description": "",
+  "maintainer": "Sous Chefs",
+  "maintainer_email": "help@sous-chefs.org",
+  "license": "Apache-2.0",
+  "platforms": {
+    "redhat": ">= 7.0",
+    "centos": ">= 7.0",
+    "scientific": ">= 7.0",
+    "oracle": ">= 7.0",
+    "amazon": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "debian": ">= 9.0",
+    "ubuntu": ">= 18.04",
+    "opensuseleap": ">= 0.0.0",
+    "suse": ">= 12.0"
+  },
+  "dependencies": {
+
+  },
+  "providing": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "10.0.1",
+  "source_url": "https://github.com/sous-chefs/mysql",
+  "issues_url": "https://github.com/sous-chefs/mysql/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 12.7"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ],
+  "eager_load_libraries": true
+}
