@@ -1,0 +1,48 @@
+{
+  "name": "newrelic",
+  "description": "Installs/Configures New Relic",
+  "long_description": "",
+  "maintainer": "David Joos",
+  "maintainer_email": "development@davidjoos.com",
+  "license": "MIT",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "amazon": ">= 0.0.0",
+    "windows": ">= 0.0.0",
+    "smartos": ">= 0.0.0",
+    "oracle": ">= 0.0.0"
+  },
+  "dependencies": {
+    "poise-python": ">= 0.0.0",
+    "curl": ">= 0.0.0",
+    "apt": ">= 0.0.0",
+    "yum": ">= 0.0.0"
+  },
+  "providing": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "2.43.1",
+  "source_url": "https://github.com/djoos-cookbooks/newrelic",
+  "issues_url": "https://github.com/djoos-cookbooks/newrelic/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 0.10.0"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ],
+  "eager_load_libraries": true
+}

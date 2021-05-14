@@ -13,3 +13,5 @@ cookbook "php", "~> 6"
 
 cookbook 'datadog', '~> 4.10.0'
 cookbook "yum", "~> 5"
+
+cookbook 'newrelic', '~> 2.43.1'
