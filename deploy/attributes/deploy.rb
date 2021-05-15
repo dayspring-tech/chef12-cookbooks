@@ -19,7 +19,7 @@ include_attribute 'deploy::logrotate'
 
 default[:opsworks][:deploy_user][:shell] = '/bin/bash'
 default[:opsworks][:deploy_user][:user] = 'deploy'
-default[:opsworks][:deploy_keep_releases] = 5
+default[:opsworks][:deploy_keep_releases] = 3
 
 # The deploy provider used. Set to one of
 # - "Branch"      - enables deploy_branch (Chef::Provider::Deploy::Branch)
