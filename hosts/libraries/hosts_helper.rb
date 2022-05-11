@@ -8,7 +8,7 @@ def generate_hosts_line_for(i, ip_field, postfix = "")
 end
 
 def generate_hosts_entries
-  search("aws_opsworks_instance").each do |instance|
+  search("aws_opsworks_instance").flat_map do |instance|
     [
       generate_hosts_line_for(instance, "private_ip"),
       generate_hosts_line_for(instance, "public_ip", "-ext")
