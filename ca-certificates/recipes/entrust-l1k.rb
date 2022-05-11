@@ -7,7 +7,7 @@ script "install entrust-l1k intermediate CA (amazon)" do
     curl -L -o /usr/share/pki/ca-trust-source/anchors/entrust_l1k.crt https://entrust.com/root-certificates/entrust_l1k.cer
     update-ca-trust 
     EOH
-    only_if { platform_family?('amazon') }
+    only_if { platform_family?('rhel', 'amazon', 'fedora', 'suse') }
 end
 
 script "install entrust-l1k intermediate CA (ubuntu)" do
