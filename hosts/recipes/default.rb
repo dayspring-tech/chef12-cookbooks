@@ -8,6 +8,7 @@ template "/etc/hosts" do
   mode "0644"
   variables(
     :localhost_name => instance["hostname"],
-    :nodes => generate_hosts_entries
+    :nodes => generate_hosts_entries,
+    :custom_nodes => node["custom_hosts"]
   )
 end

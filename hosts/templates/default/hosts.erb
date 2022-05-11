@@ -16,3 +16,8 @@ ff02::3 ip6-allhosts
 <% @nodes.each do |ip, entries| -%>
 <%= ip %> <%= entries.join(" ") %>
 <% end -%>
+
+<% @custom_nodes.each do |ip, entry| -%>
+<%= ip %> <%= entry %>
+<% end -%>
+    
