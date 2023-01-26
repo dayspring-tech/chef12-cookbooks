@@ -88,6 +88,8 @@ define :opsworks_deploy do
 
         # can't search by a value that includes colons
         escapedRdsArn = deploy[:data_sources][0][:arn]&.gsub(":", "\\:")
+        Chef::Log.debug("escapedRdsArn #{escapedRdsArn}")
+
         rds = search("aws_opsworks_rds_db_instance", "rds_db_instance_arn:#{escapedRdsArn}").first
         # rds = search("aws_opsworks_rds_db_instance").first
 
