@@ -87,7 +87,7 @@ define :opsworks_deploy do
         link_tempfiles_to_current_release
 
         # can't search by a value that includes colons
-        escapedRdsArn = deploy[:data_sources][0][:arn].gsub(":", "\\:")
+        escapedRdsArn = deploy[:data_sources][0][:arn]&.gsub(":", "\\:")
         rds = search("aws_opsworks_rds_db_instance", "rds_db_instance_arn:#{escapedRdsArn}").first
         # rds = search("aws_opsworks_rds_db_instance").first
 
