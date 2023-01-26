@@ -87,7 +87,7 @@ define :opsworks_deploy do
         link_tempfiles_to_current_release
 
         # can't search by a value that includes colons
-        escapedRdsArn = deploy[:data_sources][0][:arn]&.gsub(":", "\\:")
+        escapedRdsArn = node[:data_sources][0][:arn]&.gsub(":", "\\:")
         Chef::Log.info "escapedRdsArn #{escapedRdsArn}"
 
         rds = search("aws_opsworks_rds_db_instance", "rds_db_instance_arn:#{escapedRdsArn}").first
@@ -101,7 +101,7 @@ define :opsworks_deploy do
           variables(
             :database => {
               :host => rds[:address],
-              :database => deploy[:data_sources][0][:database_name],
+              :database => node[:data_sources][0][:database_name],
               :port => rds[:port],
               :username => rds[:db_user],
               :password => rds[:db_password],
