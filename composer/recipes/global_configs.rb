@@ -13,7 +13,6 @@ unless configs.nil?
 
     directory user_composer_dir do
       owner user
-      group user
       mode '0755'
       action :create
     end
@@ -27,7 +26,6 @@ unless configs.nil?
             command "composer config --global #{option}.#{value_k} #{value_v}"
             environment 'COMPOSER_HOME' => user_composer_dir
             user user
-            group user
             action :run
           end
         end
@@ -36,7 +34,6 @@ unless configs.nil?
           command "composer config --global #{option} #{value}"
           environment 'COMPOSER_HOME' => user_composer_dir
           user user
-          group user
           action :run
         end
       end
