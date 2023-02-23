@@ -86,36 +86,71 @@ define :opsworks_deploy do
       before_migrate do
         link_tempfiles_to_current_release
 
-        # can't search by a value that includes colons
-        escapedRdsArn = deploy[:data_sources][0][:arn].gsub(":", "\\:")
-        rds = search("aws_opsworks_rds_db_instance", "rds_db_instance_arn:#{escapedRdsArn}").first
-        # rds = search("aws_opsworks_rds_db_instance").first
+        if deploy[:data_sources][0][:arn]
+          # using RDS defined as a layer
+          # can't search by a value that includes colons
+          escapedRdsArn = deploy[:data_sources][0][:arn]&.gsub(":", "\\:")
 
-        template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
-          source 'opsworks.php.erb'
-          mode '0660'
-          owner node[:deploy][application][:user]
-          group node[:deploy][application][:group]
-          variables(
-            :database => {
-              :host => rds[:address],
-              :database => deploy[:data_sources][0][:database_name],
-              :port => rds[:port],
-              :username => rds[:db_user],
-              :password => rds[:db_password],
-              :reconnect => true,
-              :data_source_provider => 'rds',
-              :type => rds[:engine]
-            },
-            :memcached => {
-              :host => nil,
-              :port => 11211
-            }
-          )
-          only_if do
-            File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
+          rds = search("aws_opsworks_rds_db_instance", "rds_db_instance_arn:#{escapedRdsArn}").first
+          # rds = search("aws_opsworks_rds_db_instance").first
+
+          template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
+            source 'opsworks.php.erb'
+            mode '0660'
+            owner node[:deploy][application][:user]
+            group node[:deploy][application][:group]
+            variables(
+              :database => {
+                :host => rds[:address],
+                :database => deploy[:data_sources][0][:database_name],
+                :port => rds[:port],
+                :username => rds[:db_user],
+                :password => rds[:db_password],
+                :reconnect => true,
+                :data_source_provider => 'rds',
+                :type => rds[:engine]
+              },
+              :memcached => {
+                :host => nil,
+                :port => 11211
+              }
+            )
+            only_if do
+              File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
+            end
           end
-        end        
+        else
+          # using DB not in Opsworks layer
+          dbDef = node[:data_sources][0]
+          rdsArn = dbDef[:arn]
+          Chef::Log.info "rdsArn #{rdsArn}"
+
+          template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
+            source 'opsworks.php.erb'
+            mode '0660'
+            owner node[:deploy][application][:user]
+            group node[:deploy][application][:group]
+            variables(
+              :database => {
+                :host => dbDef[:host],
+                :database => dbDef[:database_name],
+                :port => dbDef[:port],
+                :username => dbDef[:username],
+                :password => dbDef[:password],
+                :reconnect => dbDef[:reconnect],
+                :data_source_provider => dbDef[:provider],
+                :type => dbDef[:engine]
+              },
+              :memcached => {
+                :host => nil,
+                :port => 11211
+              }
+            )
+            only_if do
+              File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
+            end
+          end
+        end
 
         # run user provided callback file
         run_callback_from_file("#{release_path}/deploy/before_migrate.rb")
